@@ -24,11 +24,16 @@ async function getMovieById(id) {
     const db = client.db("sample_mflix");
     const moviesCollection = db.collection("movies");
 
-    const movie = await moviesCollection.findOne({
-        _id: ObjectId.createFromHexString(id)
-    });
 
-    return movie;
+    try {
+        const movie = await moviesCollection.findOne({
+            _id: ObjectId.createFromHexString(id)
+        });
+        return movie;
+
+    } catch(error) {
+        console.error(error);
+    }
 }
 
 module.exports = {

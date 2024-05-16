@@ -21,7 +21,12 @@ async function getMovieById(req, res) {
     console.log(id);
 
     const movie = await movieDB.getMovieById(id);
-    res.json(movie);
+    if (movie) {
+        res.json(movie);
+    } else {
+        res.status(400).send("Incorrect request");
+    }
+    
 }
 
 function postMovie(req, res) {
